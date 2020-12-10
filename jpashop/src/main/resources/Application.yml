@@ -16,3 +16,4 @@ spring:
 loading:
   level:
     org.hibernate.SQL: debug # 로그로 출력
+    org.hibernate.type: trace

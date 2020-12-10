@@ -36,5 +36,24 @@
 - 그런데 한번 랜더링 된 상태에서 hello.html을 고쳐도 잘 안바뀐다. 이럴 때는 gradle에 라이브라리 devtools를 추가해준다.
 - ![alt](devtools.JPG)
 
-### JPA와 DB 설정
+## JPA와 DB 설정
+- 먼저 앞서 생성한 H2와 연결하기위한 Yaml파일을 생성한다
+- ![alt](yaml파일.JPG)
 - 
+- 위의 db와 함께 jpa로 다루기 위한 객체 member를 생성한다.
+- ![alt](member.JPG)
+- @Entity를 통해 JPA로 다룰 객체라는 것을 명시해 주고, @id, @Generated를 이용하면 DB매핑을 위해 사용함을 알린다.
+- 또 lombok을 통해 쉽게 @Getter, @Setter로 접근할 수 있게되었다.
+
+- ![alt](memberRepository.JPG)
+- 이제 db에 저장하고 조회할 수 있도록 memberRepository를 생성한다. 
+- EntityManager는 JPA로 동작하는데, 스프링부트에서 자동으로 생성되는 것으로 이를 가져와서 사용할 수 있다. 이를 통해 객체들을 다룰 수 있다.
+- persist()는 db에 넣을 수 있도록 해주고, find()는 db에서 조회할 수 있도록 해준다. 
+
+- ![alt](멤버연동테스트.JPG)
+- 이제 제대로 매핑이 되는지 테스트하기위한 코드를 작성한다. 중요한 점은 @Transactional을 명시해주어야 JPA가 제대로 동작한 다는 것이다.
+- 그러나 테스트 케이스에 Transactional이 있으면 성공하여도 rollback을 하기때문에 db에 반영되진않는다.@Rollback(False)를 써주면 반영된다. 
+
+### 쿼리 남기기
+- org.hibernate.type: trace를 yml에 추가하기
+- 또는 p6spy 라이브러리를 추가

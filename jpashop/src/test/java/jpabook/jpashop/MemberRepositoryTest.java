@@ -7,6 +7,7 @@ import org.junit.jupiter.api.io.TempDir;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
@@ -16,11 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+
 class MemberRepositoryTest {
 
     @Autowired MemberRepository memberRepository;
     @Test
     @Transactional
+    @Rollback(false)
     public void testMember() throws Exception{
         //given
         Member member = new Member();
@@ -33,6 +36,7 @@ class MemberRepositoryTest {
         //then
         assertThat(findMember.getId()).isEqualTo(member.getId());
         assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
+        assertThat(findMember).isEqualTo(member);
     }
 
 
