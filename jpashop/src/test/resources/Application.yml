@@ -1,0 +1,19 @@
+spring:
+#  datasource:
+##    url : jdbc:h2:mem:test //메모리모드로 동작
+##    username: sa
+##    password:
+##    driver-class-name: org.h2.Driver
+
+##  jpa:
+##    hibernate:
+##      ddl-auto: create  #애플리케이션 실행 시점에 엔티티 정보 보고 다시 생성
+##    properties:
+##      hibernate:
+        #show_sql: true # sout으로 출력
+##        format_sql: true
+
+loading:
+  level:
+    org.hibernate.SQL: debug # 로그로 출력
+    org.hibernate.type: trace

@@ -100,3 +100,29 @@
 - @PersistanceContext로 엔티티 매니저 생성, 인잭션 주입
 - createQuery안에는 jpql을 사용. 이 쿼리는 sql과 문법이 약간다르다. sql은 테이블이 대상이라면 jpql은 엔티티가 대상임
   
+### 회원 서비스 개발
+- 리퍼지터리에서 em.persis(member)를 하게되면 영속성 컨텍스트가 됨. 이는 key가 매핑이됨. 항상 값이 key가 들어가있음. 그래서 db에 넣지 않아도 member.getId로 조회하면 항상 값이 있음
+- MemberRepository 를 그냥 Autowored로 선언하면 나중에 변경이 힘듬 따라서 생성자 주입으로 만들어 주는게 좋다
+- memberRepository를 final로 하여 외부에서 변경못하게 해준다
+- 그냥 Autowired하고 생성자 주입을 직접 작성할 수도 있지만 롬복을 이용해 @AllArgumentConstructor로 해도되고 final필드만 가지고 생성자를 만들어주는 @RequoedArgsConstructor을 이용해도 된다.
+- DB에서 읽기만 가능하게 해주도록 (readOnly =ture)로 하면 성능을 향상시킬 수 있다.
+- ![alt](맴버서비스.JPG)
+
+- 앞서 작성한 멤버 리퍼지터리도 @RequiredArgsConstruct로 바꿀 수 있다.(em도 결국 생성자 주입을 스프링이 자동으로 해주는 것이기에)
+- ![alt](멤버리퍼지터리2.JPG)
+
+
+### 회원 기능 테스트
+- 그런데 로그를 보면 Insert쿼리가 없는 것을 알 수 있는 데, persist()는 영속성 쿼리로 테스트에서 RollBack을 해서 db에 반영 되지 않는다. 따라서 로그를 통해 확인하고 싶으면 강제로 반영시키는 flush를 통해 확인하자.
+- ![alt](회원가입.JPG)
+  
+- ![alt](중복회원예외.JPG)
+- 예외처리를 할때 try catch문으로 작성해도 되고 @Test(expected)로 적어도 같은 기능이다.
+- 예외가 발생하면 구문을 탈출하기 때문에 final로 안가고 오류가 발생한다. 따라서 맞는 오류를 잡는 구문을 써주어야한다.
+
+- 테스트는 외부 디비보단 내부 디비를 써야 효율적이다. 이때를 위해 스프링에서 제공하는 db가 있다.
+- main에 있는 yaml파일을 복사해서 test아래 resource를 만들고 그안에 넣으면 test에 있는 yaml이 test에서 별도로 동작한다. 따라서 여기서 db를 변경해준다.
+- ![alt](메모리동작.JPG)
+  
+- 다른 방법은 스프링 부트에서 아무런 설정이 없으면 기본적으로 메모리 내부로 돌리기 떄문에 yml의 위에 내용을 주석처리해주면 된다.
+- - ![alt](스프링내부.JPG)
