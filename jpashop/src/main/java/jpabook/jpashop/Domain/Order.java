@@ -17,7 +17,7 @@ public class Order {
     @Column(name="order_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="member_id") //pk의미
     private Member member;
 
@@ -25,7 +25,7 @@ public class Order {
     @JoinColumn(name="order")
     private List<Orderitmes> orderItmes  = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "delivery_id")
     private  Delivery delivery ;
 
