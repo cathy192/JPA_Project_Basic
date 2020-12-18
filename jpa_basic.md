@@ -125,4 +125,32 @@
 - ![alt](메모리동작.JPG)
   
 - 다른 방법은 스프링 부트에서 아무런 설정이 없으면 기본적으로 메모리 내부로 돌리기 떄문에 yml의 위에 내용을 주석처리해주면 된다.
-- - ![alt](스프링내부.JPG)
+- ![alt](스프링내부.JPG)
+
+### 상품 도메인
+- ![alt](상품엔티티.JPG)
+### 상품 리퍼지터리
+- ![alt](상품리퍼지터리.JPG)
+### 상품 서비스
+- ![alt](상품서비스.JPG)
+
+### 주문 도메인
+- ![alt](주문도메인1.JPG)
+- ![alt](주문도메인2.JPG)
+### 주문 리퍼지토리
+- ![alt](주문리퍼지터리.JPG)
+### 주문서비스
+
+- ![alt](cascade.JPG)
+- order를 persist 하면  들어와있는 orderItems들도 강제로 persist된다. cascade옵션 때문
+- delivery도 마찬가지
+- 따라서 orderRepository만 save해도 orderItems와 delivery도 자동으로 저장된다.
+- cascade는 관계의 private 주인인 경우에 사용해야함 라이프사이프도 동일한 경우가 좋다.
+
+- ![alt](생성못하게.JPG)
+- protected와 같은 기능으로 외부에서 맘대로 생성하지 못하게하는 기능
+
+#### 주문 서비스
+
+- ![alt](주문서비스1.JPG)
+- ![alt](주문서비스2.JPG)
