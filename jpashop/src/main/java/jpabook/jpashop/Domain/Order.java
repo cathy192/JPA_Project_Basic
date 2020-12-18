@@ -23,7 +23,7 @@ public class Order {
 
     @OneToMany
     @JoinColumn(name="order")
-    private List<Orderitmes> orderItmes  = new ArrayList<>();
+    private List<OrderItem> orderItems  = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "delivery_id")
@@ -32,5 +32,52 @@ public class Order {
     private LocalDateTime orderDate; //주문 시간(자바가 알아서 날짜 지원해줌)
     @Enumerated(EnumType.STRING)
     private OrderStatus status; // 주문 상태 [ORDER, CANCEL]
+
+    //연관관계 메서드//
+    public  void setMember(Member member){
+        this.member=member;
+        member.getOrders().add(this);
+    }
+    public void addOrderItem(OrderItem orderItem ){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery ;
+    delivery.setOrder(this);
+    }
+    //생성 메서드//
+    public static Order createOrder(Member member, Delivery delivery, OrderItem ... orderItems){
+        //여러개 넘길 수 있어서 ...
+        Order order= new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        order.setDelivery(delivery);
+        for(OrderItem orderItem : orderItems){
+            order.addOrderItem(orderItem);
+
+        }
+       order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+    /*주문 취소*/
+    public void cancel(){
+        if(delivery.getStatus()==DeliveryStatus.COMP){
+            throw new IllegalStateException("이미 배송완료한 상품을 취소할 수 없습니다");
+
+        }
+        this.setStatus(OrderStatus.CANCEL);
+        for(OrderItem orderItem : orderItems){
+            orderItem.cancel();
+        }
+    }
+
+    //조회로직
+    public int getTotalPrice(){
+        return orderItems.stream().
+                mapToInt(OrderItem::getTotalPrice).
+                sum();
+    }
 
 }
