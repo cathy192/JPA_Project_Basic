@@ -1,4 +1,4 @@
-package jpabook.jpashop;
+package jpabook.jpashop.controller;
 
 import lombok.Getter;
 import org.springframework.stereotype.Controller;

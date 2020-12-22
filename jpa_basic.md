@@ -160,3 +160,11 @@
 -![alt](주문테스트1.JPG)
 -![alt](주문테스트2.JPG)
 -![alt](주문테스트3.JPG)
+
+### 주문 검색
+- 여기서 두가지 방법을 다루는데 복잡하여 추천하지 않음. 가장 좋은 방법은 querydsl이다.
+- jpql로 처리
+-![alt](jpql.JPG)  
+
+- JPA Criteria로 처리
+- ![alt](criteria.JPG)

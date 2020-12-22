@@ -25,7 +25,7 @@ public class OrderRepository {
     public Order findOne(Long id){
         return em.find(Order.class,id);
     }
-
+/*
     public List<Order> findAll(OrderSearch orderSearch) {
 
         //동적 쿼리로 만들기
@@ -65,8 +65,8 @@ public class OrderRepository {
 
 
 
-        return query.getResultList();
-        }
+        return query.getResultList();*/
+        //}
     //jpa criteria로 해결
     public List<Order> findAllByCriteria(OrderSearch orderSearch){
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -91,6 +91,7 @@ public class OrderRepository {
         TypedQuery<Order> querys = em.createQuery(cq).setMaxResults(1000); //최대ㄴ
         return querys.getResultList();
     }
+
 
 
 }
