@@ -2,12 +2,15 @@ package jpabook.jpashop.controller;
 
 
 import jpabook.jpashop.Domain.item.Book;
+import jpabook.jpashop.Domain.item.Item;
 import jpabook.jpashop.Service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,5 +35,12 @@ public class ItemController {
 
         itemService.saveItem( book);
         return "redirect:/";
+    }
+
+    @GetMapping("/items")
+    public String list(Model model){
+        List<Item> items = itemService.findItems();
+        model.addAttribute("items",items);
+        return "items/itemList";
     }
 }
