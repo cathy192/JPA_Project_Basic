@@ -168,3 +168,10 @@
 
 - JPA Criteria로 처리
 - ![alt](criteria.JPG)
+
+
+## 홈화면과 레이아웃
+
+-  resource안에 template로 header, bodyheader, footer를 등록
+-  yaml에 파일을 찾을 수 있도록 경로를 등록함
+-  부트스트랩을 사용하기 위해 css, js파일을 받아 resources/static 폴더 안에 넣어준다. 
