@@ -1,10 +1,10 @@
 package jpabook.jpashop.Service;
 
-import jpabook.jpashop.Domain.Delivery;
-import jpabook.jpashop.Domain.Member;
-import jpabook.jpashop.Domain.Order;
-import jpabook.jpashop.Domain.OrderItem;
-import jpabook.jpashop.Domain.item.Item;
+import jpabook.jpashop.domain.Delivery;
+import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
+import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import jpabook.jpashop.repository.MemberRepository;
 import jpabook.jpashop.repository.OrderRepository;
@@ -58,7 +58,7 @@ public class OrderService {
 
     //검색
     public List<Order> findOrders(OrderSearch orderSearch){
-        return orderRepository.findAllByCriteria(orderSearch);
+        return orderRepository.findAllByString(orderSearch);
 
     }
 }

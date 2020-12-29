@@ -1,8 +1,8 @@
 package jpabook.jpashop.controller;
 
-import jpabook.jpashop.Domain.Member;
-import jpabook.jpashop.Domain.Order;
-import jpabook.jpashop.Domain.item.Item;
+import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.Service.ItemService;
 import jpabook.jpashop.Service.MemberService;
 import jpabook.jpashop.Service.OrderService;
@@ -32,11 +32,11 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public  String Order(@RequestParam("memberId") Long memverId,
+    public  String Order(@RequestParam("memberId") Long memberId,
                          @RequestParam("itemId") Long itemId,
                          @RequestParam("count") int count){
 
-        orderService.order(memverId, itemId, count);
+        orderService.order(memberId, itemId, count);
         return "redirect:/orders";
     }
     @GetMapping("/orders")

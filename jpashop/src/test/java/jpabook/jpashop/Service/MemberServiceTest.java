@@ -1,6 +1,6 @@
 package jpabook.jpashop.Service;
 
-import jpabook.jpashop.Domain.Member;
+import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 
 import org.junit.Test;

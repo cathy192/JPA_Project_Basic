@@ -1,11 +1,10 @@
 package jpabook.jpashop.repository;
 
-import jpabook.jpashop.Domain.Member;
+import jpabook.jpashop.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository //자동으로 스프링빈으로 등록(component scan대상)
