@@ -21,6 +21,18 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    //머지와 완전 동일한 동작방식 코드
+    @Transactional
+    public void updateItem(Long itemId, String name,int price ,int stock){
+        Item finditem = itemRepository.findOne(itemId);
+        //finditem.setPrice(bookParam.getPrice());
+        finditem.setName(name);
+        finditem.setPrice(price);
+        finditem.setStockQuantity(stock);
+
+    //commit 되면 plush흫 날림. 변경되면 update
+    }
+
     public List<Item> findItems(){
         return itemRepository.findAll();
     }

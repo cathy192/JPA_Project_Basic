@@ -15,9 +15,11 @@ public class ItemRepository {
     public void save(Item item){
         if(item.getId() ==null)//새로 생상한 객체이다
              em.persist(item); //신규 등록
-        else
-            em.merge(item); //이미 등록된걸 update와 비슷
-
+        else {
+            //merge는 병합이 되서 영속적으로 관리하는애이고
+            //em.merge(item)은 영속적이지 않음
+            Item merge = em.merge(item); //이미 등록된걸 update와 비슷
+        }
     }
 
     public Item findOne(Long id){
